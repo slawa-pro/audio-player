@@ -40,46 +40,99 @@ html {
   scroll-behavior: smooth;
 }
 
-.heder-container {
+body {
+  text-align: center;
+  padding-top: 40px;
+  background-color: #ddd;
   position: relative;
-  background-color: #000000;
-
 }
 
-.menu {
-  display: flex;
-  justify-content: end;
-  height: 3em;
-  align-items: center 
-}
-
-.menu-list {
-  padding-right: 1.5em;
-  color: #ffff;
+.main-wrapper {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .btn-wrapper {
-  position: absolute; 
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 2;
-  
+  z-index: 10; 
 }
 
-.btn {
-  background-color: transparent;
-  cursor: pointer;
-  width: 100px;
-  height: 100px;
+button {
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
-  border-width: 5px;
-  border-color: #ffff;
   background-image: url("http://simpleicon.com/wp-content/uploads/play1.png");
   background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-position: center;
+  cursor: pointer;
 }
-  
-.pause {  
+
+button.pause {
   background-image: url("http://simpleicon.com/wp-content/uploads/pause.png");
-  border-color: #ffff;
+}
+
+.slider-line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.slider-img {
+  display: none;
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.slider-img.active {
+  display: block;
+}
+
+/* Стили для меню */
+.menu-list {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.menu-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.menu-list li {
+  margin: 0 10px;
+}
+
+.menu-link {
+  text-decoration: none;
+  color: #fff;
+  background-color: #333;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.menu-link:hover,
+.menu-link.active {
+  background-color: #7dd58c;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between; /* по горизонтали */
+  align-items: center; /* по вертикали */
+}
+
+.course-logo {
+  width: 100px;
 }

@@ -1,64 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>playr</title>
-  <link rel="stylesheet" href="./style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Audio Player</title>
 </head>
 <body>
-  <div class="main-wrapper">
-    <header class="header">
-      <div class="heder-container">
-        <div class="logo-header"></div>
-        <div class="menu-container">
-          <ul class="menu">
-            <li class="menu-list">
-              <a  href="#" class="menu-link" data-img="1.jpg">Соловей</a>
-            </li>
-            <li class="menu-list">
-              <a href="#" class="menu-link" data-img="2.jpg">Дрозд</a>
-            </li>
-            <li class="menu-list">
-              <a href="#" class="menu-link" data-img="3.jpg">Малиновка</a>
-            </li>
-            <li class="menu-list">
-              <a href="#" class="menu-link" data-img="4.jpg">Жаворонок</a>
-            </li>
-            <li class="menu-list">
-              <a href="#" class="menu-link" data-img="5.jpg">Славка</a>
-            </li>
-          </ul>  
+    <div class="main-wrapper">
+        <header class="header">
+            <div class="header-container">
+                <nav class="menu-list">
+                    <ul>
+                        <li><a href="#" class="menu-link" data-img="1.jpg" data-audio="solovey.mp3">solovey</a></li>
+                        <li><a href="#" class="menu-link" data-img="2.jpg" data-audio="pevchy_drozd.mp3">drozd</a></li>
+                        <li><a href="#" class="menu-link" data-img="3.jpg" data-audio="zaryanka_malin.mp3">aryanka</a></li>
+                        <li><a href="#" class="menu-link" data-img="4.jpg" data-audio="zhavoronok_polevoy.mp3">zhavoronok</a></li>
+                        <li><a href="#" class="menu-link" data-img="5.jpg" data-audio="ser_slavka.mp3">slavka</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <main class="main">
+            <div class="main-container">
+                <div class="slider-line">
+                    <img id="img1" src="./img/1.jpg" class="slider-img active" alt="Image 1">
+                    <img id="img2" src="./img/2.jpg" class="slider-img" alt="Image 2">
+                    <img id="img3" src="./img/3.jpg" class="slider-img" alt="Image 3">
+                    <img id="img4" src="./img/4.jpg" class="slider-img" alt="Image 4">
+                    <img id="img5" src="./img/5.jpg" class="slider-img" alt="Image 5">
+                </div>
+            </div>
+        </main>
+        <div class="btn-wrapper">
+            <button class="btn" id="play-pause"></button>
+        </div>  
+        <div class="audio-wrapper" style="display: none;">
+            <audio src="./accests/solovey.mp3"></audio>
+            <audio src="./accests/pevchy_drozd.mp3"></audio>
+            <audio src="./accests/zaryanka_malin.mp3"></audio>
+            <audio src="./accests/zhavoronok_polevoy.mp3"></audio>
+            <audio src="./accests/ser_slavka.mp3"></audio>
         </div>
-      </div>
-    </header>
-    <main class="main">
-      <div class="main-container">
-        <div class="slider-line">
-          <img id="img1" src="./img/1.jpg" class="slider-img" alt="meme">
-          <img id="img2" src="./img/2.jpg" class="slider-img" alt="meme">
-          <img id="img3" src="./img/3.jpg" class="slider-img" alt="meme">
-          <img id="img4" src="./img/4.jpg" class="slider-img" alt="meme">
-          <img id="img5" src="./img/5.jpg" class="slider-img" alt="meme">
-        </div>
-      </div>
-      <div class="btn-wrapper">
-        <button class="btn"></button>
-      </div>  
-      <div class="audio-wrapper">
-        <audio src="./accests/solovey.mp3"></audio>
-        <audio src="./accests/pevchy_drozd.mp3"></audio>
-        <audio src="./accests/zaryanka_malin.mp3"></audio>
-        <audio src="./accests/zhavoronok_polevoy.mp3"></audio>
-        <audio src="./accests/ser_slavka.mp3"></audio>
-      </div>
-    </main>
-    <footer class="footer">
-      <div class="footer-container">
+        <footer class="footer">
+          <div class="footer-container">
+            <a href="https://github.com/slawa-pro" target="_blank" class="footer-link">GitHub</a>
+            <span>&copy; 2024</span>
+            <a href="https://rs.school/" target="_blank" class="course-link">
+              <img src="./img/rs-logo.svg" alt="Логотип курса" class="course-logo">
+            </a>
+          </div>
+        </footer>
+    </div>
 
-      </div>
-    </footer>
-  </div>
-  <script src="./main.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>
