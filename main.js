@@ -1,91 +1,82 @@
+const audioPlayer = {
+  currentTrackIndex: 0,
+  tracks: [
+      {
+          title: "Don't Start Now",
+          artist: "Dua Lipa",
+          src: "./assets/audio/dontstartnow.mp3",
+          cover: "./assets/img/dontstartnow.png"
+      },
+      {
+          title: "Lemonade",
+          artist: "Beyoncé",
+          src: "./assets/audio/beyonce.mp3",
+          cover: "./assets/img/lemonade.png"
+      }
+  ]
+};
 
-const menuLinks = document.querySelectorAll('.menu-link');
-const sliderImages = document.querySelectorAll('.slider-img');
-const playPauseButton = document.getElementById('play-pause');
-const audioElements = document.querySelectorAll('.audio-wrapper audio');
+const audio = new Audio();
+const playButton = document.getElementById("play");
+const nextButton = document.getElementById("next");
+const prevButton = document.getElementById("prev");
+const progressBar = document.getElementById("progress-bar");
+const currentTimeEl = document.getElementById("current-time");
+const durationEl = document.getElementById("duration");
+const coverImage = document.getElementById("cover-image");
+const trackTitle = document.getElementById("track-title");
+const trackArtist = document.getElementById("track-artist");
 
-let currentAudio = null;
-let isPlaying = false;
-let currentIndex = 0;
-
-function activateImage(index) {
-  sliderImages.forEach((img, idx) => {
-    img.classList.toggle('active', idx === index);
-  });
+function loadTrack(index) {
+  const track = audioPlayer.tracks[index];
+  audio.src = track.src;
+  coverImage.src = track.cover;
+  trackTitle.textContent = track.title;
+  trackArtist.textContent = track.artist;
 }
 
-function activateMenuLink(activeLink) {
-  menuLinks.forEach(link => link.classList.remove('active'));
-  activeLink.classList.add('active');
-}
-
-function playAudio(index) {
-  if (currentAudio && currentAudio !== audioElements[index]) {
-    currentAudio.pause();
-    currentAudio.currentTime = 0;
-  }
-
-  currentAudio = audioElements[index];
-
-  if (currentAudio.paused) {
-    currentAudio.play();
-    isPlaying = true;
-    updatePlayPauseButton();
+function togglePlayPause() {
+  if (audio.paused) {
+      audio.play();
+      playButton.querySelector('img').src = "./assets/svg/pause.png";
   } else {
-    currentAudio.pause();
-    isPlaying = false;
-    updatePlayPauseButton();
+      audio.pause();
+      playButton.querySelector('img').src = "./assets/svg/play.png";
   }
-
-  currentIndex = index;
 }
 
-function updatePlayPauseButton() {
-  playPauseButton.classList.toggle('pause', isPlaying);
+function nextTrack() {
+  audioPlayer.currentTrackIndex = (audioPlayer.currentTrackIndex + 1) % audioPlayer.tracks.length;
+  loadTrack(audioPlayer.currentTrackIndex);
+  audio.play();
 }
 
-menuLinks.forEach((link, index) => {
-  link.addEventListener('click', (event) => {
-    event.preventDefault();
+function prevTrack() {
+  audioPlayer.currentTrackIndex = (audioPlayer.currentTrackIndex - 1 + audioPlayer.tracks.length) % audioPlayer.tracks.length;
+  loadTrack(audioPlayer.currentTrackIndex);
+  audio.play();
+}
 
-    activateImage(index);
-    activateMenuLink(link);
-
-    if (currentAudio) {
-      currentAudio.pause();
-      currentAudio.currentTime = 0;
-    }
-
-    currentAudio = audioElements[index];
-    currentAudio.play();
-    isPlaying = true;
-    updatePlayPauseButton();
-    currentIndex = index;
-  });
+audio.addEventListener("timeupdate", () => {
+  const progress = (audio.currentTime / audio.duration) * 100;
+  progressBar.value = progress;
+  currentTimeEl.textContent = formatTime(audio.currentTime);
+  durationEl.textContent = formatTime(audio.duration);
 });
 
-window.addEventListener('DOMContentLoaded', () => {
-  activateImage(0);
-  activateMenuLink(menuLinks[0]);
-  currentAudio = audioElements[0];
+progressBar.addEventListener("input", () => {
+  const seekTime = (progressBar.value / 100) * audio.duration;
+  audio.currentTime = seekTime;
 });
 
-playPauseButton.addEventListener('click', () => {
-  if (!currentAudio) return;
+function formatTime(seconds) {
+  const minutes = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+}
 
-  if (currentAudio.paused) {
-    currentAudio.play();
-    isPlaying = true;
-  } else {
-    currentAudio.pause();
-    isPlaying = false;
-  }
-  updatePlayPauseButton();
-});
+playButton.addEventListener("click", togglePlayPause);
+nextButton.addEventListener("click", nextTrack);
+prevButton.addEventListener("click", prevTrack);
 
-audioElements.forEach(audio => {
-  audio.addEventListener('ended', () => {
-    isPlaying = false;
-    updatePlayPauseButton();
-  });
-});
+loadTrack(audioPlayer.currentTrackIndex);
